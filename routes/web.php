@@ -20,3 +20,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'UserController@index');
 Route::post('users', 'UserController@store')->name('user.store'); //Guarda
 Route::delete('users/{user}', 'UserController@destroy')->name('user.destroy');
+Auth::routes();
+
+Route::get('/home', 'UserController@index')->name('home');

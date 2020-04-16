@@ -7,8 +7,14 @@ use App\User;
 
 class UserController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     public function index(){
-        $users = User::latest()->get();
+        $users = User::first()
+        ->orderBy('id', 'asc')
+        ->get();
         return view('users.index', [
             'users' => $users
         ]);
