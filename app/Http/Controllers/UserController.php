@@ -2,30 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\User;
 
 class UserController extends Controller
 {
-    public function __construct(){
-        $this->middleware('auth');
-    }
+    // VALIDACIÔN DE AUTENTICACIÔN EN LA RUTA= web.php
+    // public function __construct(){
+    //     $this->middleware('auth');
+    // }
 
     public function index(){
         $users = User::first()
-        ->orderBy('id', 'asc')
+        ->orderBy('id', 'desc')
         ->get();
         return view('users.index', [
             'users' => $users
         ]);
     }
 
-    public function store(Request $request){
-        $request->validate([
-            'name'      => 'required',
-            'email'     => ['email', 'required', 'unique:users'],
-            'password'  => ['required', 'min:8']
-        ]);
+    public function store(UserRequest $request){
+
+        // REEMPLAZADO POR INCLUSIÔN DE UN REQUESTS = UserRequest
+        // $request->validate([
+        //     'name'      => 'required',
+        //     'email'     => ['email', 'required', 'unique:users'],
+        //     'password'  => ['required', 'min:8']
+        // ]);
 
         User::create([
             'name' => $request->name,

@@ -16,10 +16,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
-Route::get('/', 'UserController@index');
-Route::post('users', 'UserController@store')->name('user.store'); //Guarda
-Route::delete('users/{user}', 'UserController@destroy')->name('user.destroy');
 Auth::routes();
 
-Route::get('/home', 'UserController@index')->name('home');
+Route::get('/', 'UserController@index')->name('home')->middleware('auth');
+Route::get('users', 'UserController@index')->middleware('auth')->name('users');
+Route::post('users', 'UserController@store')->name('user.store'); //Guarda
+Route::delete('users/{user}', 'UserController@destroy')->name('user.destroy');
